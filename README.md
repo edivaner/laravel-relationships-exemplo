@@ -1,20 +1,12 @@
 
 # Setup Docker Para Projetos Laravel
-[Assine a Academy, e Seja VIP!](https://academy.especializati.com.br)
 
 ### Passo a passo
 Clone Repositório
 ```sh
-git clone https://github.com/especializati/setup-docker-laravel.git my-project
+git clone https://github.com/edivaner/laravel-relationship-exemplo.git my-project
 cd my-project/
 ```
-
-
-Alterne para a branch laravel 8.x
-```sh
-git checkout laravel-8-with-php-7.4
-```
-
 
 Remova o versionamento
 ```sh
