@@ -4,7 +4,7 @@
 ### Passo a passo
 Clone Repositório
 ```sh
-git clone https://github.com/edivaner/laravel-relationship-exemplo.git my-project
+git clone https://github.com/edivaner/laravel-relationships-exemplo.git my-project
 cd my-project/
 ```
 
@@ -66,6 +66,10 @@ Gerar a key do projeto Laravel
 php artisan key:generate
 ```
 
+Sempre que precisar rodar um comando artisan acesso o container:
+````
+docker exec -it laravel-relationships-table_laravel_8_1 bash
+````
 
 Acesse o projeto
 [http://localhost:8180](http://localhost:8180)

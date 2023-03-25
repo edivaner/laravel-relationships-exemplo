@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\Course;
+use App\Models\Module;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\User;
+use App\Models\Preference;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +15,56 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/one-to-one', function () {
+    // $user = User::first();
+    $user = User::with('preference')->find(2);
+
+    $data = [
+        'background_color' => '#FGBB63',
+    ];
+
+    if ($user->preference == null) {
+        // $user->preference()->create($data);
+        $preference = new Preference($data);
+        // $preference = $data;
+        $user->preference()->save($preference);
+    } else {
+        $user->preference()->update($data);
+    }
+
+    $user->refresh();
+
+    dd($user->preference);
+});
+
+
+Route::get('/one-to-many', function () {
+    // $course = new Course();
+    // $course->create(['name' => 'Curso de Laravel']);
+
+    $course = Course::with('modules.lessons')->find(1);
+
+    // $dataModules = ['name' => 'TYPEORM 2'];
+    // $dataLessons = ['name' => 'Create a TYPEORM', 'video' => 'URLVIDEO'];
+
+    // $course->modules()->create($dataModules);
+    // $course->modules()->lessons->create($dataLessons);
+
+    // $modules = $course->modules;
+    // $lessons = $course->modules->lessons;
+
+    echo 'Curso: ' . $course->name . '<br/>';
+    foreach ($course->modules as $modules) {
+        echo "Modulo: {$modules->name} <br/>";
+
+        foreach ($modules->lessons as $lessons) {
+            echo "Aulas: {$lessons->name}";
+        }
+    }
+    // dd($modules);
+    dd("Fim");
+});
 
 Route::get('/', function () {
     return view('welcome');
