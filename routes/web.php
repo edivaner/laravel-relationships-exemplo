@@ -2,6 +2,7 @@
 
 use App\Models\Course;
 use App\Models\Module;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Preference;
@@ -64,6 +65,30 @@ Route::get('/one-to-many', function () {
     }
     // dd($modules);
     dd("Fim");
+});
+
+
+Route::get('/many-to-many', function () {
+    $user = User::with("permissions")->find(3);
+
+    $permission = Permission::first();
+    $user->permissions()->save($permission);
+
+
+    // $user->permissions()->saveMany([
+    //     Permission::find(3),
+    //     Permission::find(2)
+    // ]);
+
+    // $user->permissions()->sync([2]);
+
+    // $user->permissions()->attach([2, 3]);
+
+    // $user->permissions()->detach([2, 3]);
+
+    // $user->refresh();
+
+    dd($user->permissions);
 });
 
 Route::get('/', function () {
